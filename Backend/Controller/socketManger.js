@@ -56,6 +56,9 @@ export const connectToSocket=(server)=>{
                 })
             }
         })
+        socket.on("leave-call", (id) => {
+            socket.broadcast.emit("user-left", id);
+          });
         socket.on('disconnect',()=>{
             var diffTime=Math.abs(timeOnline[socket.id]- new Date())
             var key;

@@ -208,6 +208,10 @@ export default function VideoMeetComponent() {
           newVideos.delete(id);
           return newVideos;
         });
+        if (connections[id]) {
+          connections[id].close();  // Close the peer connection
+          delete connections[id];   // Remove it from memory
+        }
       });
       socketRef.current.on("user-joined", (id, clients) => {
         clients.forEach((socketListId) => {
@@ -388,15 +392,32 @@ export default function VideoMeetComponent() {
 
  
   let routeTO=useNavigate();
-  const handleEndCall=useCallback(()=>{
+  const handleEndCall = useCallback(() => {
     try {
-      let tracks=localVideoref.current.srcObject.getTracks();
-      tracks.forEach(track=>track.stop())
+      let tracks = localVideoref.current?.srcObject?.getTracks();
+      tracks?.forEach((track) => track.stop());
+  
+      if (socketRef.current && socketIdRef.current) {
+        socketRef.current.emit("leave-call", socketIdRef.current);
+      }
+  
+      Object.values(connections).forEach((connection) => {
+        connection.close();
+      });
+  
+      Object.keys(connections).forEach((id) => {
+        delete connections[id];
+      });
+  
+      window.localStream = null;
+      setVideos(new Map());
+  
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    routeTO('/home')  
-  },[])
+    routeTO('/home');
+  }, []);
+  
 
   const handleChat = useCallback(() => setModal((prevModal) => !prevModal), []);
 
@@ -407,21 +428,27 @@ export default function VideoMeetComponent() {
   }, [window.localStream]);
 
   return (
-    <div>
-      {askForUsername ? (
-        <div>
-          <h2>Enter Into Lobby</h2>
+    <div className="h-screen w-screen">
+      {askForUsername ?(
+        <div className="flex flex-col items-center justify-center h-full bg-gray-100">
+          <h2 className="text-2xl font-bold mb-4">Enter Into Lobby</h2>
           <TextField
             label="Username"
             variant="outlined"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            className="mb-4 w-64"
           />
-          <Button variant="contained" onClick={connect}>
+          <Button variant="contained" onClick={connect} className="mb-6 w-64">
             Connect
           </Button>
-          <div>
-            <video ref={localVideoref} autoPlay muted />
+          <div className="rounded-lg mt-2 overflow-hidden shadow-lg border">
+            <video
+              ref={localVideoref}
+              autoPlay
+              muted
+              className="w-80 h-48 object-cover bg-black"
+            />
           </div>
         </div>
       ) : (
