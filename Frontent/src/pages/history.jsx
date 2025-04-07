@@ -47,7 +47,7 @@ function HistoryPage() {
           </Card>
         )})
       ) : (
-        <p>Loading meeting history...</p>
+        <p>No History Yet...</p>
       )}
     </>
   );

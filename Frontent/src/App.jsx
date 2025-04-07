@@ -7,6 +7,7 @@ import { MyContext} from './context/context.jsx'
 import VideoMeet from './pages/videoMeet.jsx'
 import HomeComponent from './pages/home.jsx'
 import HistoryPage from './pages/history.jsx'
+import PrivateRoute from './pages/privateRoute.jsx'
 
 function App() {
   
@@ -16,9 +17,10 @@ function App() {
       <Router>        
         <Routes>
           <Route path='/' element={<LandingPage/>} />     
+          
           <Route path='/login' element={<Registration/>} />      
-          <Route path='/home' element={<HomeComponent />} />
-          <Route path='/history' element={<HistoryPage />} /> 
+          <Route path='/home' element={<PrivateRoute><HomeComponent/></PrivateRoute>} />
+          <Route path='/history' element={<PrivateRoute><HistoryPage/></PrivateRoute>} /> 
           
           <Route path='/:url' element={<VideoMeet/>} />
         </Routes>
