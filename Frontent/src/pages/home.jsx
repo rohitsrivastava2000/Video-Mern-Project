@@ -26,7 +26,7 @@ function HomeComponent() {
             <IconButton>
               <RestoreIcon className="text-gray-700" />
             </IconButton>
-            <p className="text-lg font-medium">History</p>
+            <p onClick={()=>navigate('/history')} className="text-lg cursor-pointer font-medium">History</p>
           </div>
           <Button
             className="!text-lg"

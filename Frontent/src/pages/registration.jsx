@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, replace, useNavigate } from "react-router-dom";
 import  {MyContext}  from "../context/context.jsx";
 
 export default function Registration() {
@@ -10,10 +10,16 @@ export default function Registration() {
   const [email,setEmail]=useState('');
   const [password,setPassword]=useState('');
   const [error,setError]=useState('');
+  const [isLoginIn,setIsLoginIn]=useState(true);//protect the route
 
   const {handleLogin,handleRegister,setEmailLocal}=useContext(MyContext);  
 
- 
+  
+  useEffect(()=>{
+    const token=localStorage.getItem('token');
+    if(token)
+      navigate('/',{replace:true})
+  },[])
   
   const navigate=useNavigate();
 
@@ -39,7 +45,7 @@ export default function Registration() {
           if(response.success){
             console.log(response.message);
             localStorage.setItem('token',response.token);
-            navigate('/home');
+            navigate('/home',{ replace: true });
           }
           else
           {
