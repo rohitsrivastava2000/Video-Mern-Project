@@ -1,6 +1,7 @@
 import { children, createContext, useState } from "react";
 import axios from "axios";
-import server from "../pages/environment";
+import server from "../pages/environmentFile";
+
 
 
 export const MyContext=createContext({});
