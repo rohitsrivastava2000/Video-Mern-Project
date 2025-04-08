@@ -1,3 +1,13 @@
+import express from "express"
+import dp from './Config/dbConnection.js'
+import cors from 'cors'
+import bodyParser from "body-parser";
+import 'dotenv/config'
+import route from "./Route/userRoute.js";
+import { createServer } from 'node:http'
+import { Server } from 'socket.io';
+import { connectToSocket } from "./Controller/socketManger.js";
+
 // Setup express & CORS
 const app = express();
 const server = createServer(app);
