@@ -23,8 +23,7 @@ function App() {
           <Route path='/history' element={<PrivateRoute><HistoryPage/></PrivateRoute>} /> 
           
           <Route path='/:url' element={<VideoMeet/>} />
-        </Routes>
-        
+        </Routes>        
       </Router>
     </>
   )
