@@ -18,7 +18,7 @@ db.on('connected',()=>{
 });
 
 db.on('error',()=>{
-    console.error('Connected error to mongodb server',err);
+    console.error('Connected error to mongodb server');
 });
 
 db.on('disconnected',()=>{

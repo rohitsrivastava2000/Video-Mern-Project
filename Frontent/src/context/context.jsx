@@ -1,11 +1,12 @@
 import { children, createContext, useState } from "react";
 import axios from "axios";
+import server from "../pages/environment";
 
 
 export const MyContext=createContext({});
 
 const client=axios.create({
-    baseURL:'http://localhost:5000/api/v1/users'
+    baseURL:`${server}/api/v1/users`
 })
 
 export const MyProvider=({children})=>{
