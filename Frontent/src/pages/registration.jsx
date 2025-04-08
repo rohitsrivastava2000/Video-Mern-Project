@@ -16,6 +16,7 @@ export default function Registration() {
 
   const {handleLogin,handleRegister,setEmailLocal}=useContext(MyContext);  
 
+  const navigate=useNavigate();
   
   useEffect(()=>{
     const token=localStorage.getItem('token');
@@ -23,7 +24,6 @@ export default function Registration() {
       navigate('/',{replace:true})
   },[])
   
-  const navigate=useNavigate();
 
   const handleSubmit=async (e)=>{
       e.preventDefault();
@@ -51,10 +51,10 @@ export default function Registration() {
           if(response.success){
             console.log(response.message);
             localStorage.setItem('token',response.token);
-            setInterval(()=>{
+            setTimeout(()=>{
 
               navigate('/',{ replace: true });
-            },[2000])
+            },2000)
           }
           else
           {
