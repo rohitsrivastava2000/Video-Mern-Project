@@ -17,7 +17,7 @@ const port=process.env.PORT || 4000;
 
 
 app.use(cors({
-    origin: ['https://video-meet-frontend-9573.onrender.com'],
+    origin: ['https://video-meet-frontend-22.onrender.com'],
     credentials: true
   }));
   
