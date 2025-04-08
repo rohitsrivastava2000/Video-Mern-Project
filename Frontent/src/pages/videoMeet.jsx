@@ -447,7 +447,7 @@ export default function VideoMeetComponent() {
               ref={localVideoref}
               autoPlay
               muted
-              className="w-80 h-48 object-cover bg-black"
+              className="w-80 h-48 object-cover bg-gray "
             />
           </div>
         </div>
@@ -485,7 +485,7 @@ export default function VideoMeetComponent() {
               ))}
             </div>
           </div>
-          <div className="h-[80%] w-full bg-amber-100 relative ">
+          <div className="h-[80%] w-full bg-black relative ">
             <video
               className="rounded absolute bottom-0 w-full h-[100%] object-fill "
               ref={localVideoref}
@@ -495,24 +495,24 @@ export default function VideoMeetComponent() {
             <div className="absolute bottom-0 z-1 bg-[rgb(35,36,28)] w-full flex justify-center p-1 opacity-96 gap-7  ">
               <IconButton onClick={handleVideo}>
                 {video ? (
-                  <VideocamIcon className="!w-12 !h-12 text-[rgb(160,160,160)] " />
+                  <VideocamIcon className="!w-12 !h-12 text-[rgb(255,255,255)] " />
                 ) : (
-                  <VideocamOffIcon className="!w-9 !h-9 text-[rgb(160,160,160)]" />
+                  <VideocamOffIcon className="!w-9 !h-9 text-[rgb(255,255,255)]" />
                 )}
               </IconButton>
               <IconButton onClick={handleAudio}>
                 {audio ? (
-                  <MicIcon className="!w-9 !h-9 text-[rgb(160,160,160)] " />
+                  <MicIcon className="!w-9 !h-9 text-[rgb(255,255,255)] " />
                 ) : (
-                  <MicOffIcon className="!w-9 !h-9 text-[rgb(160,160,160)] " />
+                  <MicOffIcon className="!w-9 !h-9 text-[rgb(255,255,255)]" />
                 )}
               </IconButton>
               {screenAvailable && (
                 <IconButton onClick={handleScreen}>
                   {screen ? (
-                    <ScreenShareIcon className="!w-12 !h-12 text-[rgb(160,160,160)]" />
+                    <ScreenShareIcon className="!w-12 !h-12 text-[rgb(5,223,114)]" />
                   ) : (
-                    <StopScreenShareIcon className="!w-9 !h-9 text-[rgb(160,160,160)]" />
+                    <StopScreenShareIcon className="!w-9 !h-9 text-[rgb(5,223,114)]" />
                   )}
                 </IconButton>
               )}
