@@ -18,6 +18,7 @@ function HistoryPage() {
         setMeetings(history);
       } catch (error) {
         console.error('Error fetching meeting history:', error);
+        
       }
     };
     fetchHistory();
