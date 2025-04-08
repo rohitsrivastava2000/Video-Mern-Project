@@ -7,7 +7,8 @@ import server from "../pages/environmentFile";
 export const MyContext=createContext({});
 
 const client=axios.create({
-    baseURL:`${server}/api/v1/users`
+    baseURL:`${server}/api/v1/users`,
+    withCredentials: true 
 })
 
 export const MyProvider=({children})=>{
