@@ -10,18 +10,24 @@ const client=axios.create({
 
 export const MyProvider=({children})=>{
 
-   const [emailLocal,setEmailLocal]=useState("");
+   
 
     const handleRegister=async (name,userName,email,password)=>{
         try {
+            console.log(name);
+            console.log(userName);
+            console.log(email);
+            console.log(password)
             const response=await client.post('/signup',{
                 name,userName,email,password
             })
-            
+          //  console.log(response.data + "haddlee")
             return response.data;
             
             
         } catch (error) {
+            console.log("handle")
+            console.log(error)
             throw error
         }
     }

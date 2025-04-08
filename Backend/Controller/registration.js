@@ -10,9 +10,16 @@ export const register=async(req,res)=>{
     try {
         const existingUser=await User.findOne({userName:userName})
         if(existingUser){
-            return res.status(httpStatus.FOUND).json({
+            return res.status(200).json({
                 success:false,
-                message:"User Already Exists"
+                message:"Username Already Exists"
+            })
+        }
+        const existingEmail=await User.findOne({email:email})
+        if(existingEmail){
+            return res.status(200).json({
+                success:false,
+                message:"User Email Already Exists"
             })
         }
         const hashPassword=await bcrypt.hash(password,10);
@@ -46,21 +53,21 @@ export const login=async(req,res)=>{
         const {email,password}=req.body;
         if(!email || !password)
             {
-                return res.status(402).json({
+                return res.status(200).json({
                     success:false,
                     message:"All field are Mandatory"
                 })
             }
             const userResponse=await User.findOne({email})
             if(!userResponse){
-                return res.status(402).json({
+                return res.status(200).json({
                     success:false,
                     message:"User Not Registered.."
                 })
             }
             //
             if(!( await bcrypt.compare(password,userResponse.password))){
-                return res.status(404).json({
+                return res.status(200).json({
                     success:false,
                     message:"Password Miss Matched"
                 })

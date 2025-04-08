@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, replace, useNavigate } from "react-router-dom";
 import  {MyContext}  from "../context/context.jsx";
+import { ToastContainer } from "react-toastify";
+import { notify } from "./toast.js";
 
 export default function Registration() {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,7 +12,7 @@ export default function Registration() {
   const [email,setEmail]=useState('');
   const [password,setPassword]=useState('');
   const [error,setError]=useState('');
-  const [isLoginIn,setIsLoginIn]=useState(true);//protect the route
+  
 
   const {handleLogin,handleRegister,setEmailLocal}=useContext(MyContext);  
 
@@ -30,6 +32,9 @@ export default function Registration() {
         if(!isLogin){
           //sign up
           const response=await handleRegister(fullName, userName,email,password)
+          console.log("hiiii")
+        //  console.log(response +" notify")
+          notify(response)
           if(response.success){
             console.log(response.message)
             setIsLogin(true);
@@ -42,10 +47,14 @@ export default function Registration() {
         {
           //login
           const response =await handleLogin(email,password);
+          notify(response);
           if(response.success){
             console.log(response.message);
             localStorage.setItem('token',response.token);
-            navigate('/home',{ replace: true });
+            setInterval(()=>{
+
+              navigate('/',{ replace: true });
+            },[2000])
           }
           else
           {
@@ -53,8 +62,8 @@ export default function Registration() {
           }
         }
       } catch (error) {
-        let message=response.message;
-        setError(message);
+        console.log("hi")
+       console.log(error)
       }
 
   }
@@ -85,10 +94,10 @@ export default function Registration() {
           )}
           {!isLogin && (
             <div>
-              <label className="block text-white">Full Name</label>
+              <label className="block text-white">User Name</label>
               <input
                 type="text"
-                placeholder="Enter your name"
+                placeholder="Enter username should be Unique"
                 value={userName}
                 onChange={(e)=>setUserName(e.target.value)}
                 className="w-full p-2 mt-1 border border-gray-300 rounded-lg bg-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
@@ -129,6 +138,7 @@ export default function Registration() {
           </span>
         </p>
       </motion.div>
+      <ToastContainer/>
     </div>
   );
 }
