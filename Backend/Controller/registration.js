@@ -8,6 +8,7 @@ export const register=async(req,res)=>{
     const {name ,userName,email,password}=req.body;
 
     try {
+        
         const existingUser=await User.findOne({userName:userName})
         if(existingUser){
             return res.status(200).json({

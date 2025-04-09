@@ -5,6 +5,7 @@ import 'dotenv/config';
 import route from "./Route/userRoute.js";
 import { createServer } from 'node:http';
 import { connectToSocket } from "./Controller/socketManger.js";
+import dp from "./Config/dbConnection.js"
 
 const app = express();
 const server = createServer(app);
